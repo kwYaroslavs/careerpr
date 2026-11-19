@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: careerpr
+Version: 0.0.1
+Requires-Python: >=3.12
+Requires-Dist: fastapi>=0.115
+Requires-Dist: uvicorn[standard]
+Requires-Dist: pydantic>=2.7
+Requires-Dist: pydantic-settings
+Requires-Dist: sqlalchemy>=2
+Requires-Dist: alembic
+Requires-Dist: pymupdf
+Requires-Dist: httpx
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"

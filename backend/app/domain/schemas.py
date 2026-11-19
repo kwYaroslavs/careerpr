@@ -44,7 +44,9 @@ class Fact(BaseModel):
     risk_tier: str = "low"  # low | high
     verification_status: Verification = Verification.UNVERIFIED
     source_reference: str | None = None
-    confidence: float | None = Field(default=None, ge=0.0, le=1.0)  # informational only, never a gate
+    confidence: float | None = Field(
+        default=None, ge=0.0, le=1.0
+    )  # informational only, never a gate
 
 
 class ResumeItem(BaseModel):

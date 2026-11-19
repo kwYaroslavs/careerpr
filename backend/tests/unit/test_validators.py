@@ -5,16 +5,27 @@ BEFORE = "Built REST APIs with PHP and Symfony."
 
 
 def _ctx() -> ValidationContext:
-    resume = Resume(id="r1", items=[ResumeItem(id="i1", text=BEFORE)], protected={"email": "a@b.com"})
+    resume = Resume(
+        id="r1",
+        items=[ResumeItem(id="i1", text=BEFORE)],
+        protected={"email": "a@b.com"},
+    )
     facts = [Fact(id="f1", text="Built REST APIs with PHP and Symfony")]
     return ValidationContext(resume=resume, facts=facts, other_companies={"Acme"})
 
 
 def _p(after: str, target_id: str = "i1") -> ChangeProposal:
     return ChangeProposal(
-        id="p1", run_id="run1", target_id=target_id, operation=Operation.REWRITE,
-        risk_tier=RiskTier.R2, before=BEFORE, after=after, change_reason="clarity",
-        fact_ids=["f1"], expected_version=1,
+        id="p1",
+        run_id="run1",
+        target_id=target_id,
+        operation=Operation.REWRITE,
+        risk_tier=RiskTier.R2,
+        before=BEFORE,
+        after=after,
+        change_reason="clarity",
+        fact_ids=["f1"],
+        expected_version=1,
     )
 
 
@@ -47,7 +58,6 @@ def test_input_not_mutated() -> None:
     p = _p("Built REST APIs with PHP and Kubernetes.")
     run_validators(p, _ctx())
     assert p.status == "pending"
-
 
 
 def test_acronym_adjective_is_not_treated_as_a_new_entity() -> None:

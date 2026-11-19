@@ -30,8 +30,26 @@ class ValidationContext:
 
 
 _NUM = re.compile(r"\d+(?:[.,]\d+)?")
-_WORDNUM = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
-            "twenty", "thirty", "forty", "fifty", "hundred", "thousand", "million", "percent"}
+_WORDNUM = {
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "twenty",
+    "thirty",
+    "forty",
+    "fifty",
+    "hundred",
+    "thousand",
+    "million",
+    "percent",
+}
 _PLACEHOLDER = re.compile(r"\[[A-Za-z _]+\]|\{\{.*?\}\}|\bTODO\b|\bTBD\b|lorem ipsum", re.I)
 _CAPS = re.compile(r"\b[A-Z][A-Za-z0-9+#.]{1,}\b")
 
@@ -53,7 +71,10 @@ def v1_refs(p: ChangeProposal, c: ValidationContext) -> list[Violation]:
         out.append(
             Violation(
                 "V1",
-                f"stale proposal version: expected {p.expected_version}, current {c.resume.version}",
+                (
+                    f"stale proposal version: expected {p.expected_version}, "
+                    f"current {c.resume.version}"
+                ),
             )
         )
     missing = set(p.fact_ids) - c.fact_ids
@@ -88,10 +109,7 @@ def v3_no_new_entities(p: ChangeProposal, c: ValidationContext) -> list[Violatio
         for w in _CAPS.findall(p.after)
         if w.lower() not in known
         and w.lower() != first
-        and not any(
-            w.lower() == entity + "ful"
-            for entity in known_acronyms
-        )
+        and not any(w.lower() == entity + "ful" for entity in known_acronyms)
     }
     return [Violation("V3", f"new entities: {sorted(new)}")] if new else []
 

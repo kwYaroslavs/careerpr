@@ -1,8 +1,8 @@
 .PHONY: setup dev test lint fmt typecheck check golden clean
 PY=cd backend && . .venv/bin/activate &&
 setup:
-	cd backend && python3 -m venv .venv && . .venv/bin/activate && pip install -e ".[dev]"
-	pre-commit install || true
+	if [ ! -f backend/.env ]; then cp .env.example backend/.env; fi
+	cd backend && python3 -m venv .venv && . .venv/bin/activate && pip install -e ".[dev]" && .venv/bin/pre-commit install || true
 dev:
 	$(PY) uvicorn app.main:app --reload --port 8000
 test:

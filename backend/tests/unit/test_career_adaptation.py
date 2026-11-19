@@ -13,8 +13,12 @@ from app.domain.schemas import (
 
 def _f(cat: MatchCategory, fact_ids: list[str]) -> TransferableFinding:
     return TransferableFinding(
-        id="t1", requirement_id="req1", category=cat, competence="Platform Engineering",
-        fact_ids=fact_ids, rationale="Ran Docker + CI/CD in production",
+        id="t1",
+        requirement_id="req1",
+        category=cat,
+        competence="Platform Engineering",
+        fact_ids=fact_ids,
+        rationale="Ran Docker + CI/CD in production",
     )
 
 
