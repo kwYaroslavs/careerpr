@@ -1,0 +1,12 @@
+# MVP-1: Postgres. MVP-0 uses SQLite, compose optional.
+services:
+  db:
+    image: postgres:16
+    environment: { POSTGRES_USER: careerpr, POSTGRES_PASSWORD: careerpr, POSTGRES_DB: careerpr }
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+  ollama:
+    image: ollama/ollama
+    profiles: [local-llm]
+    ports: ["11434:11434"]
+volumes: { pgdata: {} }
