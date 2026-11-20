@@ -11,7 +11,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-002 | Core domain contracts<br><sub>Базовые доменные контракты</sub> | M0 | T-001 | done |
 | T-003 | Database models and migration baseline<br><sub>Модели БД и базовая миграция</sub> | M0 | T-002 | done |
 | T-004 | Gateway protocol and FakeLLM<br><sub>Протокол Gateway и FakeLLM</sub> | M0 | T-002 | done |
-| T-005 | Prompt loader and LLM run logging<br><sub>Загрузчик промптов и логирование LLM-запусков</sub> | M0 | T-003,T-004 | todo |
+| T-005 | Prompt loader and LLM run logging<br><sub>Загрузчик промптов и логирование LLM-запусков</sub> | M0 | T-003,T-004 | done |
 | T-006 | Fact Base write/read services<br><sub>Сервисы записи/чтения Fact Base</sub> | M0 | T-003 | todo |
 | T-007 | Structured Master Resume and Base Resume<br><sub>Структурированные Master и Base Resume</sub> | M0 | T-002,T-006 | todo |
 | T-008 | Job description intake<br><sub>Приём текста вакансии</sub> | M1 | T-003 | todo |
