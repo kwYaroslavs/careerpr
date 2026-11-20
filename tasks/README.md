@@ -14,7 +14,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-005 | Prompt loader and LLM run logging<br><sub>Загрузчик промптов и логирование LLM-запусков</sub> | M0 | T-003,T-004 | done |
 | T-006 | Fact Base write/read services<br><sub>Сервисы записи/чтения Fact Base</sub> | M0 | T-003 | done |
 | T-007 | Structured Master Resume and Base Resume<br><sub>Структурированные Master и Base Resume</sub> | M0 | T-002,T-006 | done |
-| T-008 | Job description intake<br><sub>Приём текста вакансии</sub> | M1 | T-003 | todo |
+| T-008 | Job description intake<br><sub>Приём текста вакансии</sub> | M1 | T-003 | done |
 | T-009 | Requirement extraction contract and prompt<br><sub>Контракт и промпт извлечения требований</sub> | M1 | T-004,T-008 | todo |
 | T-010 | Requirement confirmation API<br><sub>API подтверждения требований</sub> | M1 | T-009 | todo |
 | T-011 | Skill normalization and reviewed aliases<br><sub>Нормализация навыков и проверенные алиасы</sub> | M1 | T-002 | todo |
