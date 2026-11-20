@@ -9,7 +9,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 |---|---|---|---|---|
 | T-001 | Scaffold and quality gates<br><sub>Каркас проекта и проверки качества</sub> | M0 | — | done |
 | T-002 | Core domain contracts<br><sub>Базовые доменные контракты</sub> | M0 | T-001 | done |
-| T-003 | Database models and migration baseline<br><sub>Модели БД и базовая миграция</sub> | M0 | T-002 | todo |
+| T-003 | Database models and migration baseline<br><sub>Модели БД и базовая миграция</sub> | M0 | T-002 | done |
 | T-004 | Gateway protocol and FakeLLM<br><sub>Протокол Gateway и FakeLLM</sub> | M0 | T-002 | todo |
 | T-005 | Prompt loader and LLM run logging<br><sub>Загрузчик промптов и логирование LLM-запусков</sub> | M0 | T-003,T-004 | todo |
 | T-006 | Fact Base write/read services<br><sub>Сервисы записи/чтения Fact Base</sub> | M0 | T-003 | todo |
