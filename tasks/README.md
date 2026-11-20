@@ -1,7 +1,7 @@
 # Task cards — execution order / Порядок выполнения задач
 
 > EN: Cards are written in English so any AI can read them; each has a Russian block for you. One card = one AI session = one branch = one PR. Take the first `todo` card whose dependencies are `done`.
-> RU: Карточки на английском (для ИИ) + русский блок (для вас). Одна карточка = одна сессия ИИ = одна ветка = один PR. Берите первую `todo`, у которой все зависимости `done`.
+> RU: Карточки на английском (для ИИ) + русский блок (для вас). Одна карточка = одна сессия ИИ = одна ветка = одна PR. Берите первую `todo`, у которой все зависимости `done`.
 
 Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 
@@ -13,7 +13,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-004 | Gateway protocol and FakeLLM<br><sub>Протокол Gateway и FakeLLM</sub> | M0 | T-002 | done |
 | T-005 | Prompt loader and LLM run logging<br><sub>Загрузчик промптов и логирование LLM-запусков</sub> | M0 | T-003,T-004 | done |
 | T-006 | Fact Base write/read services<br><sub>Сервисы записи/чтения Fact Base</sub> | M0 | T-003 | done |
-| T-007 | Structured Master Resume and Base Resume<br><sub>Структурированные Master и Base Resume</sub> | M0 | T-002,T-006 | todo |
+| T-007 | Structured Master Resume and Base Resume<br><sub>Структурированные Master и Base Resume</sub> | M0 | T-002,T-006 | done |
 | T-008 | Job description intake<br><sub>Приём текста вакансии</sub> | M1 | T-003 | todo |
 | T-009 | Requirement extraction contract and prompt<br><sub>Контракт и промпт извлечения требований</sub> | M1 | T-004,T-008 | todo |
 | T-010 | Requirement confirmation API<br><sub>API подтверждения требований</sub> | M1 | T-009 | todo |
