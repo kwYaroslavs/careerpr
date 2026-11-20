@@ -170,6 +170,12 @@ class JobRequirement(BaseModel):
     user_confirmed: bool = False
 
 
+class RequirementsExtractionResult(BaseModel):
+    schema_version: int = SCHEMA_VERSION
+    requirements: list[JobRequirement] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+
+
 class MatchBucket(StrEnum):
     STRONG = "strong"
     POSSIBLE = "possible"
