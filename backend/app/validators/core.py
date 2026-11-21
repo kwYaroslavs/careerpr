@@ -4,7 +4,7 @@ import re
 from collections.abc import Callable
 from dataclasses import dataclass, field
 
-from app.domain.schemas import ChangeProposal, Fact, Operation, ProposalStatus, Resume
+from app.domain.schemas import ChangeProposal, Fact, FactAlias, Operation, ProposalStatus, Resume
 
 
 @dataclass
@@ -19,6 +19,8 @@ class ValidationContext:
     facts: list[Fact]
     vocabulary: set[str] = field(default_factory=set)  # allowed entities
     other_companies: set[str] = field(default_factory=set)  # tracker companies (V7)
+    aliases: list[FactAlias] = field(default_factory=list)  # reviewed fact aliases
+    skill_aliases: dict[str, str] = field(default_factory=dict)  # term -> canonical/alias mapping
 
     @property
     def fact_ids(self) -> set[str]:
@@ -116,21 +118,72 @@ def v2_no_new_numbers(p: ChangeProposal, c: ValidationContext) -> list[Violation
 def v3_no_new_entities(p: ChangeProposal, c: ValidationContext) -> list[Violation]:
     known = {w.lower() for w in c.vocabulary}
     source_entities = _CAPS.findall(p.before)
+
     for f in c.facts:
         if f.id in p.fact_ids:
             source_entities.extend(_CAPS.findall(f.text))
-    known |= {w.lower() for w in source_entities}
+
+    known_aliases = {alias.alias.lower() for alias in c.aliases if alias.reviewed}
+    for alias_term in c.skill_aliases.values():
+        known_aliases.add(alias_term.lower())
+
+    known |= {w.lower() for w in source_entities} | known_aliases
     known_acronyms = {w.lower() for w in source_entities if w.isupper()}
+
     words = p.after.split()
-    first = words[0].strip(".,;:").lower() if words else ""  # sentence-initial caps is grammar
-    new = {
+    first = words[0].strip(".,;:").lower() if words else ""
+
+    new_caps = [
         w
         for w in _CAPS.findall(p.after)
         if w.lower() not in known
         and w.lower() != first
         and not any(w.lower() == entity + "ful" for entity in known_acronyms)
+    ]
+
+    is_stretch = any(f.verification_status == "user_stretch" for f in c.facts if f.id in p.fact_ids)
+
+    violations = []
+    prohibited = {
+        "manager",
+        "director",
+        "vp",
+        "lead",
+        "architect",
+        "engineer",
+        "developer",
+        "founder",
+        "ceo",
+        "cto",
+        "aws",
+        "gcp",
+        "azure",
+        "pmp",
+        "cisa",
+        "cism",
+        "cissp",
+        "scrum",
+        "certified",
     }
-    return [Violation("V3", f"new entities: {sorted(new)}")] if new else []
+
+    for w in new_caps:
+        w_lower = w.lower()
+        if is_stretch:
+            if w_lower in prohibited or any(
+                kw in w_lower
+                for kw in [
+                    "manager",
+                    "director",
+                    "lead",
+                    "architect",
+                    "certif",
+                ]
+            ):
+                violations.append(Violation("V3", f"prohibited stretch entity: {w}"))
+        else:
+            violations.append(Violation("V3", f"new entity: {w}"))
+
+    return violations
 
 
 def v5_protected_unchanged(p: ChangeProposal, c: ValidationContext) -> list[Violation]:
