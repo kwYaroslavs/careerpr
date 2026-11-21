@@ -2,8 +2,9 @@
 
 from typing import Annotated, Any
 
+import sqlalchemy.exc
 from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StringConstraints
 from sqlalchemy.orm import Session
 
 from app.core.db import get_db
@@ -16,7 +17,7 @@ router = APIRouter(prefix="/jobs", tags=["jobs"])
 class JobCreateRequest(BaseModel):
     id: str
     url_normalized: str | None = None
-    raw_job_description: str
+    raw_job_description: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
     extraction_metadata: ExtractionMetadata = Field(default_factory=ExtractionMetadata)
     source: str = "raw"
 
@@ -41,21 +42,21 @@ def create_job(body: JobCreateRequest, db: Annotated[Session, Depends(get_db)]) 
             extraction_metadata=ExtractionMetadata(**created.extraction_metadata),
             source=created.source,
         )
-    except ValueError as e:
+    except (ValueError, sqlalchemy.exc.IntegrityError) as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)) from e
 
 
 @router.get("/{job_id}", response_model=JobPosting)
 def get_job(job_id: str, db: Annotated[Session, Depends(get_db)]) -> Any:
     """Retrieve a specific job posting by ID."""
-    job_model = JobService.get_job_posting(db, job_id)
-    if not job_model:
+    job = JobService.get_job_posting(db, job_id)
+    if not job:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Job posting not found")
     return JobPosting(
-        schema_version=job_model.schema_version,
-        id=job_model.id,
-        url_normalized=job_model.url_normalized,
-        raw_job_description=job_model.raw_job_description,
-        extraction_metadata=ExtractionMetadata(**job_model.extraction_metadata),
-        source=job_model.source,
+        schema_version=job.schema_version,
+        id=job.id,
+        url_normalized=job.url_normalized,
+        raw_job_description=job.raw_job_description,
+        extraction_metadata=ExtractionMetadata(**job.extraction_metadata),
+        source=job.source,
     )

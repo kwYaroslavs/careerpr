@@ -31,7 +31,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-022 | Markdown renderer<br><sub>Рендерер Markdown</sub> | M1 | T-007,T-020,T-021 | done |
 | T-023 | PDF renderer and fit-loop<br><sub>PDF-рендерер и fit-loop</sub> | M1 | T-022 | done |
 | T-024 | Readiness Gate G4 and immutable snapshot<br><sub>Гейт готовности G4 и неизменяемый snapshot</sub> | M1 | T-020,T-021,T-023 | done |
-| T-025 | Golden end-to-end and adversarial suite<br><sub>Golden e2e и состязательные тесты</sub> | M1 | T-008,T-009,T-013,T-020,T-021,T-024 | todo |
+| T-025 | Golden end-to-end and adversarial suite<br><sub>Golden e2e и состязательные тесты</sub> | M1 | T-008,T-009,T-013,T-020,T-021,T-024 | done |
 | T-026 | Real LLM provider behind Gateway<br><sub>Реальный LLM-провайдер за Gateway</sub> | M2 | T-025 | todo |
 | T-027 | Frontend profile and Fact Base screens<br><sub>Фронтенд: профиль и Fact Base</sub> | M2 | T-006,T-007,T-025 | todo |
 | T-028 | Frontend vacancy and proposal review workspace<br><sub>Фронтенд: вакансия и ревью предложений</sub> | M2 | T-010,T-012,T-020,T-021,T-025,T-027 | todo |
