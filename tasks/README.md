@@ -19,7 +19,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-010 | Requirement confirmation API<br><sub>API подтверждения требований</sub> | M1 | T-009 | done |
 | T-011 | Skill normalization and reviewed aliases<br><sub>Нормализация навыков и проверенные алиасы</sub> | M1 | T-002 | todo |
 | T-012 | Requirement-to-fact evidence map<br><sub>Карта «требование → факт»</sub> | M1 | T-006,T-010,T-011 | done |
-| T-013 | Hard-constraint gate and fit bucket<br><sub>Гейт жёстких ограничений и корзина соответствия</sub> | M1 | T-012 | todo |
+| T-013 | Hard-constraint gate and fit bucket<br><sub>Гейт жёстких ограничений и корзина соответствия</sub> | M1 | T-012 | done |
 | T-014 | Validator V1 and proposal reference checks<br><sub>Валидатор V1 и проверка ссылок предложений</sub> | M1 | T-002,T-007,T-012 | todo |
 | T-015 | Validator V2 number/date protection<br><sub>Валидатор V2: защита чисел и дат</sub> | M1 | T-006,T-014 | todo |
 | T-016 | Validator V3 fact-backed entity and claim protection<br><sub>Валидатор V3: защита сущностей и утверждений</sub> | M1 | T-006,T-011,T-014 | todo |
