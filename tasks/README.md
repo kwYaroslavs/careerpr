@@ -28,7 +28,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-019 | R2 rewrite contract and prompt<br><sub>Контракт и промпт переписывания R2</sub> | M1 | T-004,T-016,T-017,T-018 | done |
 | T-020 | Proposal validation, lifecycle and idempotency<br><sub>Валидация, жизненный цикл и идемпотентность предложений</sub> | M1 | T-003,T-017,T-018,T-019 | done |
 | T-021 | Cover letter generation<br><sub>Генерация сопроводительного письма</sub> | M1 | T-017,T-019,T-020 | done |
-| T-022 | Markdown renderer<br><sub>Рендерер Markdown</sub> | M1 | T-007,T-020,T-021 | todo |
+| T-022 | Markdown renderer<br><sub>Рендерер Markdown</sub> | M1 | T-007,T-020,T-021 | done |
 | T-023 | PDF renderer and fit-loop<br><sub>PDF-рендерер и fit-loop</sub> | M1 | T-022 | todo |
 | T-024 | Readiness Gate G4 and immutable snapshot<br><sub>Гейт готовности G4 и неизменяемый snapshot</sub> | M1 | T-020,T-021,T-023 | todo |
 | T-025 | Golden end-to-end and adversarial suite<br><sub>Golden e2e и состязательные тесты</sub> | M1 | T-008,T-009,T-013,T-020,T-021,T-024 | todo |
