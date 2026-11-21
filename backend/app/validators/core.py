@@ -29,8 +29,10 @@ class ValidationContext:
         return {i.id for i in self.resume.items}
 
 
-_NUM = re.compile(r"\d+(?:[.,]\d+)?")
+_NUM = re.compile(r"\b\d+(?:[.,]\d+)?\b")
+_DATE_YEAR = re.compile(r"\b(?:19|20)\d{2}\b")
 _WORDNUM = {
+    "zero",
     "one",
     "two",
     "three",
@@ -41,14 +43,29 @@ _WORDNUM = {
     "eight",
     "nine",
     "ten",
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
+    "nineteen",
     "twenty",
     "thirty",
     "forty",
     "fifty",
+    "sixty",
+    "seventy",
+    "eighty",
+    "ninety",
     "hundred",
     "thousand",
     "million",
+    "billion",
     "percent",
+    "percentage",
 }
 _PLACEHOLDER = re.compile(r"\[[A-Za-z _]+\]|\{\{.*?\}\}|\bTODO\b|\bTBD\b|lorem ipsum", re.I)
 _CAPS = re.compile(r"\b[A-Z][A-Za-z0-9+#.]{1,}\b")
@@ -56,7 +73,9 @@ _CAPS = re.compile(r"\b[A-Z][A-Za-z0-9+#.]{1,}\b")
 
 def _numbers(text: str) -> set[str]:
     nums = {n.replace(",", ".") for n in _NUM.findall(text)}
-    return nums | {w for w in re.findall(r"[a-z]+", text.lower()) if w in _WORDNUM}
+    years = set(_DATE_YEAR.findall(text))
+    words = {w for w in re.findall(r"\b[a-z]+\b", text.lower()) if w in _WORDNUM}
+    return nums | years | words
 
 
 def v1_refs(p: ChangeProposal, c: ValidationContext) -> list[Violation]:

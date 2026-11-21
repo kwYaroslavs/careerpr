@@ -21,7 +21,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-012 | Requirement-to-fact evidence map<br><sub>Карта «требование → факт»</sub> | M1 | T-006,T-010,T-011 | done |
 | T-013 | Hard-constraint gate and fit bucket<br><sub>Гейт жёстких ограничений и корзина соответствия</sub> | M1 | T-012 | done |
 | T-014 | Validator V1 and proposal reference checks<br><sub>Валидатор V1 и проверка ссылок предложений</sub> | M1 | T-002,T-007,T-012 | done |
-| T-015 | Validator V2 number/date protection<br><sub>Валидатор V2: защита чисел и дат</sub> | M1 | T-006,T-014 | todo |
+| T-015 | Validator V2 number/date protection<br><sub>Валидатор V2: защита чисел и дат</sub> | M1 | T-006,T-014 | done |
 | T-016 | Validator V3 fact-backed entity and claim protection<br><sub>Валидатор V3: защита сущностей и утверждений</sub> | M1 | T-006,T-011,T-014 | todo |
 | T-017 | Validators V5–V7 and unified validation result<br><sub>Валидаторы V5–V7 и единый результат валидации</sub> | M1 | T-014 | todo |
 | T-018 | R0/R1 deterministic proposal generation<br><sub>Детерминированная генерация предложений R0/R1</sub> | M1 | T-010,T-012,T-013 | todo |
