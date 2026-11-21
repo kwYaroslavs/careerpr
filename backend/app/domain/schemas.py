@@ -153,6 +153,15 @@ class RewriteResult(BaseModel):
     warnings: list[str] = Field(default_factory=list)
 
 
+class CoverLetterResult(BaseModel):
+    schema_version: int = SCHEMA_VERSION
+    cover_letter: str
+    fact_ids: list[str] = Field(default_factory=list)
+    company_hook: str
+    clarification_questions: list["ClarificationQuestion"] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+
+
 class JobPosting(BaseModel):
     schema_version: int = SCHEMA_VERSION
     id: str
