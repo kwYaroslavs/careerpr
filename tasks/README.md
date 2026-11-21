@@ -26,7 +26,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-017 | Validators V5–V7 and unified validation result<br><sub>Валидаторы V5–V7 и единый результат валидации</sub> | M1 | T-014 | done |
 | T-018 | R0/R1 deterministic proposal generation<br><sub>Детерминированная генерация предложений R0/R1</sub> | M1 | T-010,T-012,T-013 | done |
 | T-019 | R2 rewrite contract and prompt<br><sub>Контракт и промпт переписывания R2</sub> | M1 | T-004,T-016,T-017,T-018 | done |
-| T-020 | Proposal validation, lifecycle and idempotency<br><sub>Валидация, жизненный цикл и идемпотентность предложений</sub> | M1 | T-003,T-017,T-018,T-019 | todo |
+| T-020 | Proposal validation, lifecycle and idempotency<br><sub>Валидация, жизненный цикл и идемпотентность предложений</sub> | M1 | T-003,T-017,T-018,T-019 | done |
 | T-021 | Cover letter generation<br><sub>Генерация сопроводительного письма</sub> | M1 | T-017,T-019,T-020 | todo |
 | T-022 | Markdown renderer<br><sub>Рендерер Markdown</sub> | M1 | T-007,T-020,T-021 | todo |
 | T-023 | PDF renderer and fit-loop<br><sub>PDF-рендерер и fit-loop</sub> | M1 | T-022 | todo |
