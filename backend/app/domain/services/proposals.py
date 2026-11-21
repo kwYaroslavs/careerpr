@@ -8,7 +8,7 @@ from datetime import UTC, datetime
 from sqlalchemy.orm import Session
 
 from app.domain.models import AuditEventModel, ChangeProposalModel
-from app.domain.schemas import ChangeProposal, ProposalStatus
+from app.domain.schemas import ChangeProposal, Operation, ProposalStatus, RiskTier
 from app.domain.services.resume import ResumeService
 from app.validators.core import ValidationContext, run_validators
 
@@ -90,8 +90,8 @@ class ProposalService:
             id=db_cp.id,
             run_id=db_cp.run_id,
             target_id=db_cp.target_id,
-            operation=db_cp.operation,
-            risk_tier=db_cp.risk_tier,
+            operation=Operation(db_cp.operation),
+            risk_tier=RiskTier(db_cp.risk_tier),
             before=db_cp.before,
             after=db_cp.after,
             change_reason=db_cp.change_reason,

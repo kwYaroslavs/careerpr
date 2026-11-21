@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 from app.domain.schemas import (
     ClarificationQuestion,
+    ClarificationQuestionStatus,
     Fact,
     JobRequirement,
     MatchCategory,
@@ -101,7 +102,7 @@ def map_requirements_to_facts(
                 id=cq_id,
                 requirement_id=req.id,
                 question=f"Do you have experience related to: {req.text}?",
-                status="pending",
+                status=ClarificationQuestionStatus.PENDING,
             )
             clarification_questions.append(cq)
 
