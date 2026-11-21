@@ -144,6 +144,15 @@ class ExtractionMetadata(BaseModel):
     unparsed: list[str] = Field(default_factory=list)
 
 
+class RewriteResult(BaseModel):
+    schema_version: int = SCHEMA_VERSION
+    rewritten_text: str
+    fact_ids: list[str] = Field(min_length=1)
+    requirement_ids: list[str] = Field(min_length=1)
+    stretch_candidate: bool = False
+    warnings: list[str] = Field(default_factory=list)
+
+
 class JobPosting(BaseModel):
     schema_version: int = SCHEMA_VERSION
     id: str
