@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerPR - Profile & Fact Base Workspace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CareerPR Workspace</h1>
+        <p>Evidence-based AI career workspace — Profile & Fact Base Management</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Add / Edit Fact</h2>
+            <form id="fact-form">
+                <div class="form-group">
+                    <label for="fact-id">Fact ID:</label>
+                    <input type="text" id="fact-id" required placeholder="e.g. fact_python_exp">
+                </div>
+                <div class="form-group">
+                    <label for="fact-text">Fact Text:</label>
+                    <textarea id="fact-text" required placeholder="Detailed factual claim..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="fact-category">Category:</label>
+                    <input type="text" id="fact-category" value="experience" placeholder="experience, skill, education...">
+                </div>
+                <div class="form-group">
+                    <label for="fact-risk">Risk Tier:</label>
+                    <select id="fact-risk">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fact-verification">Verification Status:</label>
+                    <select id="fact-verification">
+                        <option value="unverified">Unverified</option>
+                        <option value="verified">Verified</option>
+                        <option value="disputed">Disputed</option>
+                        <option value="user_stretch">User Stretch</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fact-evidence">Evidence Reference:</label>
+                    <input type="text" id="fact-evidence" placeholder="e.g. commit hash, doc ref">
+                </div>
+                <button type="submit" id="save-fact-btn">Save Fact</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>Fact Base & Verification Display</h2>
+            <div class="controls">
+                <button id="refresh-facts-btn">Refresh Facts</button>
+            </div>
+            <div id="facts-container">
+                <p>Loading facts...</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
