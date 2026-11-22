@@ -34,7 +34,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-025 | Golden end-to-end and adversarial suite<br><sub>Golden e2e и состязательные тесты</sub> | M1 | T-008,T-009,T-013,T-020,T-021,T-024 | done |
 | T-026 | Real LLM provider behind Gateway<br><sub>Реальный LLM-провайдер за Gateway</sub> | M2 | T-025 | done |
 | T-027 | Frontend profile and Fact Base screens<br><sub>Фронтенд: профиль и Fact Base</sub> | M2 | T-006,T-007,T-025 | done |
-| T-028 | Frontend vacancy and proposal review workspace<br><sub>Фронтенд: вакансия и ревью предложений</sub> | M2 | T-010,T-012,T-020,T-021,T-025,T-027 | todo |
+| T-028 | Frontend vacancy and proposal review workspace<br><sub>Фронтенд: вакансия и ревью предложений</sub> | M2 | T-010,T-012,T-020,T-021,T-025,T-027 | done |
 | T-029 | MVP-0 acceptance on real vacancies<br><sub>Приёмка MVP-0 на реальных вакансиях</sub> | M3 | T-026,T-028,T-030 | todo |
 | T-030 | Stretch layer: user-approved claim softening<br><sub>Слой Stretch: приукрашивание с одобрением пользователя</sub> | M1 | T-006,T-016,T-020 | todo |
 | T-031 | Career adaptation contracts<br><sub>Контракты адаптации карьеры</sub> | M0 | T-002 | review |

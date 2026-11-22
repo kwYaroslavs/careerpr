@@ -24,14 +24,20 @@ header p {
     font-size: 14px;
 }
 
-main {
+main.grid-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
-@media (max-width: 768px) {
-    main {
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media (max-width: 900px) {
+    main.grid-layout {
         grid-template-columns: 1fr;
     }
 }
@@ -99,7 +105,7 @@ button:hover {
     margin-bottom: 15px;
 }
 
-.fact-item {
+.fact-item, .proposal-item, .requirement-item {
     border: 1px solid #e5e7eb;
     border-radius: 6px;
     padding: 12px;
@@ -127,14 +133,35 @@ button:hover {
 .badge.unverified { background-color: #ffee99; color: #78350f; }
 .badge.disputed { background-color: #fee2e2; color: #991b1b; }
 .badge.user_stretch { background-color: #e0e7ff; color: #3730a3; }
+.badge.approved { background-color: #d1fae5; color: #065f46; }
+.badge.rejected { background-color: #fee2e2; color: #991b1b; }
+.badge.proposed { background-color: #fef3c7; color: #92400e; }
 
-.fact-body {
+.fact-body, .proposal-body {
     font-size: 13px;
     color: #4b5563;
     margin-bottom: 5px;
 }
 
-.fact-meta {
+.fact-meta, .proposal-meta {
     font-size: 11px;
     color: #6b7280;
+}
+
+.stretch-box {
+    border: 1px dashed #6366f1;
+    background: #eef2ff;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.stretch-box h3 {
+    margin-top: 0;
+    font-size: 15px;
+    color: #4338ca;
+}
+
+.mt-15 {
+    margin-top: 15px;
 }

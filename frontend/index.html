@@ -3,65 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareerPR - Profile & Fact Base Workspace</title>
+    <title>CareerPR - Vacancy, Proposal & Fact Base Workspace</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <h1>CareerPR Workspace</h1>
-        <p>Evidence-based AI career workspace — Profile & Fact Base Management</p>
+        <p>Evidence-based AI career workspace — Vacancy, Requirements, Evidence Map & Proposals Review</p>
     </header>
 
-    <main>
-        <section class="card">
-            <h2>Add / Edit Fact</h2>
-            <form id="fact-form">
-                <div class="form-group">
-                    <label for="fact-id">Fact ID:</label>
-                    <input type="text" id="fact-id" required placeholder="e.g. fact_python_exp">
-                </div>
-                <div class="form-group">
-                    <label for="fact-text">Fact Text:</label>
-                    <textarea id="fact-text" required placeholder="Detailed factual claim..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="fact-category">Category:</label>
-                    <input type="text" id="fact-category" value="experience" placeholder="experience, skill, education...">
-                </div>
-                <div class="form-group">
-                    <label for="fact-risk">Risk Tier:</label>
-                    <select id="fact-risk">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fact-verification">Verification Status:</label>
-                    <select id="fact-verification">
-                        <option value="unverified">Unverified</option>
-                        <option value="verified">Verified</option>
-                        <option value="disputed">Disputed</option>
-                        <option value="user_stretch">User Stretch</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fact-evidence">Evidence Reference:</label>
-                    <input type="text" id="fact-evidence" placeholder="e.g. commit hash, doc ref">
-                </div>
-                <button type="submit" id="save-fact-btn">Save Fact</button>
-            </form>
-        </section>
+    <main class="grid-layout">
+        <!-- Column 1: Facts & Vacancy Input -->
+        <div class="column">
+            <section class="card">
+                <h2>Add / Edit Fact</h2>
+                <form id="fact-form">
+                    <div class="form-group">
+                        <label for="fact-id">Fact ID:</label>
+                        <input type="text" id="fact-id" required placeholder="e.g. fact_python_exp">
+                    </div>
+                    <div class="form-group">
+                        <label for="fact-text">Fact Text:</label>
+                        <textarea id="fact-text" required placeholder="Detailed factual claim..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="fact-category">Category:</label>
+                        <input type="text" id="fact-category" value="experience" placeholder="experience, skill, education...">
+                    </div>
+                    <div class="form-group">
+                        <label for="fact-risk">Risk Tier:</label>
+                        <select id="fact-risk">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fact-verification">Verification Status:</label>
+                        <select id="fact-verification">
+                            <option value="unverified">Unverified</option>
+                            <option value="verified">Verified</option>
+                            <option value="disputed">Disputed</option>
+                            <option value="user_stretch">User Stretch</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fact-evidence">Evidence Reference:</label>
+                        <input type="text" id="fact-evidence" placeholder="e.g. commit hash, doc ref">
+                    </div>
+                    <button type="submit" id="save-fact-btn">Save Fact</button>
+                </form>
+            </section>
 
-        <section class="card">
-            <h2>Fact Base & Verification Display</h2>
-            <div class="controls">
-                <button id="refresh-facts-btn">Refresh Facts</button>
-            </div>
-            <div id="facts-container">
-                <p>Loading facts...</p>
-            </div>
-        </section>
+            <section class="card">
+                <h2>Fact Base & Verification Display</h2>
+                <div class="controls">
+                    <button id="refresh-facts-btn">Refresh Facts</button>
+                </div>
+                <div id="facts-container">
+                    <p>Loading facts...</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Column 2: Vacancy, Requirements, Stretch & Proposals -->
+        <div class="column">
+            <section class="card">
+                <h2>1. Vacancy & Requirements</h2>
+                <form id="job-form">
+                    <div class="form-group">
+                        <label for="job-title">Job Title:</label>
+                        <input type="text" id="job-title" required placeholder="e.g. Senior Python Engineer">
+                    </div>
+                    <div class="form-group">
+                        <label for="job-company">Company:</label>
+                        <input type="text" id="job-company" required placeholder="e.g. Tech Corp">
+                    </div>
+                    <div class="form-group">
+                        <label for="job-text">Job Description (JD):</label>
+                        <textarea id="job-text" required placeholder="Paste untrusted JD text here..."></textarea>
+                    </div>
+                    <button type="submit" id="create-job-btn">Create Job & Extract Requirements</button>
+                </form>
+                <div id="job-result" class="mt-15"></div>
+                <div id="requirements-container" class="mt-15"></div>
+            </section>
+
+            <section class="card">
+                <h2>2. Stretch Panel & Proposals Review</h2>
+                <div class="controls">
+                    <button id="refresh-proposals-btn">Refresh Proposals</button>
+                </div>
+                <div id="stretch-panel" class="stretch-box">
+                    <h3>Stretch Suggestions (Risk R0-R2)</h3>
+                    <div id="stretch-container"><p>No stretch items loaded.</p></div>
+                </div>
+                <div id="proposals-container" class="mt-15">
+                    <p>No proposals loaded.</p>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>3. Snapshot Export</h2>
+                <form id="snapshot-form">
+                    <div class="form-group">
+                        <label for="snapshot-job-id">Job ID:</label>
+                        <input type="text" id="snapshot-job-id" required placeholder="Job ID for snapshot">
+                    </div>
+                    <div class="form-group">
+                        <label for="snapshot-proposal-id">Proposal ID:</label>
+                        <input type="text" id="snapshot-proposal-id" required placeholder="Approved Proposal ID">
+                    </div>
+                    <button type="submit" id="export-snapshot-btn">Export Ready Snapshot</button>
+                </form>
+                <div id="snapshot-result" class="mt-15"></div>
+            </section>
+        </div>
     </main>
 
     <script src="app.js"></script>
