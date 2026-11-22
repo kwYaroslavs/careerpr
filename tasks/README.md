@@ -39,7 +39,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-030 | Stretch layer: user-approved claim softening<br><sub>Слой Stretch: приукрашивание с одобрением пользователя</sub> | M1 | T-006,T-016,T-020 | done |
 | T-031 | Career adaptation contracts<br><sub>Контракты адаптации карьеры</sub> | M0 | T-002 | done |
 | T-032 | Skill Graph and Role Taxonomy storage<br><sub>Хранилище Skill Graph и Role Taxonomy</sub> | MVP-1 | T-011,T-031 | done |
-| T-033 | Transferable Skills Discovery<br><sub>Поиск переносимых навыков</sub> | MVP-1 | T-004,T-016,T-032 | todo |
+| T-033 | Transferable Skills Discovery<br><sub>Поиск переносимых навыков</sub> | MVP-1 | T-004,T-016,T-032 | done |
 | T-034 | Gap analysis<br><sub>Анализ пробелов</sub> | MVP-1 | T-012,T-033 | todo |
 | T-035 | Role Discovery and search modes<br><sub>Поиск ролей и режимы поиска</sub> | MVP-1 | T-032,T-033 | todo |
 | T-036 | Adaptive Tailoring for distant roles (V10)<br><sub>Адаптация резюме под далёкие роли (V10)</sub> | MVP-1 | T-019,T-020,T-033 | todo |
