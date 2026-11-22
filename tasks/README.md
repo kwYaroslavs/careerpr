@@ -37,7 +37,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-028 | Frontend vacancy and proposal review workspace<br><sub>Фронтенд: вакансия и ревью предложений</sub> | M2 | T-010,T-012,T-020,T-021,T-025,T-027 | done |
 | T-029 | MVP-0 acceptance on real vacancies<br><sub>Приёмка MVP-0 на реальных вакансиях</sub> | M3 | T-026,T-028,T-030 | done |
 | T-030 | Stretch layer: user-approved claim softening<br><sub>Слой Stretch: приукрашивание с одобрением пользователя</sub> | M1 | T-006,T-016,T-020 | done |
-| T-031 | Career adaptation contracts<br><sub>Контракты адаптации карьеры</sub> | M0 | T-002 | review |
+| T-031 | Career adaptation contracts<br><sub>Контракты адаптации карьеры</sub> | M0 | T-002 | done |
 | T-032 | Skill Graph and Role Taxonomy storage<br><sub>Хранилище Skill Graph и Role Taxonomy</sub> | MVP-1 | T-011,T-031 | todo |
 | T-033 | Transferable Skills Discovery<br><sub>Поиск переносимых навыков</sub> | MVP-1 | T-004,T-016,T-032 | todo |
 | T-034 | Gap analysis<br><sub>Анализ пробелов</sub> | MVP-1 | T-012,T-033 | todo |
