@@ -42,7 +42,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-033 | Transferable Skills Discovery<br><sub>Поиск переносимых навыков</sub> | MVP-1 | T-004,T-016,T-032 | done |
 | T-034 | Gap analysis<br><sub>Анализ пробелов</sub> | MVP-1 | T-012,T-033 | done |
 | T-035 | Role Discovery and search modes<br><sub>Поиск ролей и режимы поиска</sub> | MVP-1 | T-032,T-033 | done |
-| T-036 | Adaptive Tailoring for distant roles (V10)<br><sub>Адаптация резюме под далёкие роли (V10)</sub> | MVP-1 | T-019,T-020,T-033 | todo |
+| T-036 | Adaptive Tailoring for distant roles (V10)<br><sub>Адаптация резюме под далёкие роли (V10)</sub> | MVP-1 | T-019,T-020,T-033 | done |
 | T-037 | Frontend: modes, role directions, match categories<br><sub>Фронтенд: режимы, направления, категории</sub> | MVP-1 | T-028,T-035,T-036 | todo |
 
 ## How to delegate to an AI / Как отдать задачу ИИ

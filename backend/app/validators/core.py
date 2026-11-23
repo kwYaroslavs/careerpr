@@ -203,6 +203,79 @@ def v7_no_company_leak(p: ChangeProposal, c: ValidationContext) -> list[Violatio
     return [Violation("V7", f"other company named: {hit}")] if hit else []
 
 
+def v10_transferable_framing(p: ChangeProposal, c: ValidationContext) -> list[Violation]:
+    """V10: transferable evidence must not be worded as direct experience.
+
+    Blocks:
+    - New titles/roles not in facts or source (e.g. Platform Engineer, etc.)
+    - Ownership claims in new areas without backing facts.
+    - Claims of direct experience where source facts only indicate transferable.
+    """
+    violations = []
+    after_lower = p.after.lower()
+    source_texts = " ".join(f.text.lower() for f in c.facts if f.id in p.fact_ids)
+
+    role_titles = [
+        "platform engineer",
+        "devops engineer",
+        "sre",
+        "solutions architect",
+        "cloud architect",
+    ]
+
+    prohibited_direct_patterns = [
+        r"\b(?:as a|working as|title:)\s+(?:senior\s+|lead\s+|staff\s+|principal\s+)?"
+        r"(platform engineer|devops engineer|sre|site reliability engineer|"
+        r"cloud architect|solutions architect|security engineer|data engineer|"
+        r"ml engineer|engineering manager|tech lead)\b",
+        r"\b(?:worked as|serving as|hired as)\s+(?:a\s+)?"
+        r"(?:senior\s+|lead\s+|staff\s+|principal\s+)?"
+        r"(platform engineer|devops engineer|sre|site reliability engineer|"
+        r"cloud architect|solutions architect|security engineer|data engineer|"
+        r"ml engineer|engineering manager|tech lead)\b",
+        r"\bbuilt a\s+(?:platform|devops|sre|infrastructure)\s+team\b",
+        r"\bowned (?:all\s+)?(?:infrastructure|platform|cloud)\b",
+    ]
+
+    for pat in prohibited_direct_patterns:
+        if re.search(pat, after_lower):
+            matched_title = None
+            for title in role_titles:
+                if title in pat and title in source_texts:
+                    matched_title = title
+                    break
+            if matched_title:
+                continue
+
+            violations.append(
+                Violation(
+                    "V10",
+                    (
+                        "Transferable experience cannot be worded as direct "
+                        f"experience or new role title/ownership: matches pattern '{pat}'"
+                    ),
+                )
+            )
+
+    for title in role_titles:
+        if (
+            f"as a {title}" in after_lower
+            and title not in source_texts
+            and f"as a {title}" not in source_texts
+        ):
+            violations.append(
+                Violation(
+                    "V10",
+                    (
+                        "Transferable evidence cannot claim direct role title "
+                        f"'{title}' without supporting source facts."
+                    ),
+                )
+            )
+
+    return violations
+
+
 VALIDATORS: dict[str, Callable[[ChangeProposal, ValidationContext], list[Violation]]] = {
     "V1": v1_refs,
     "V2": v2_no_new_numbers,
@@ -210,6 +283,7 @@ VALIDATORS: dict[str, Callable[[ChangeProposal, ValidationContext], list[Violati
     "V5": v5_protected_unchanged,
     "V6": v6_no_placeholders,
     "V7": v7_no_company_leak,
+    "V10": v10_transferable_framing,
 }
 
 
