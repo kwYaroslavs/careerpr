@@ -136,6 +136,18 @@ button:hover {
 .badge.approved { background-color: #d1fae5; color: #065f46; }
 .badge.rejected { background-color: #fee2e2; color: #991b1b; }
 .badge.proposed { background-color: #fef3c7; color: #92400e; }
+.badge.direct { background-color: #d1fae5; color: #065f46; }
+.badge.transferable { background-color: #e0e7ff; color: #3730a3; }
+.badge.potential { background-color: #fef3c7; color: #92400e; }
+.badge.genuine_gap { background-color: #fee2e2; color: #991b1b; }
+
+.role-direction-item {
+    border: 1px solid #c7d2fe;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #eef2ff;
+}
 
 .fact-body, .proposal-body {
     font-size: 13px;

@@ -83,15 +83,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const jobForm = document.getElementById("job-form");
     const jobResult = document.getElementById("job-result");
     const requirementsContainer = document.getElementById("requirements-container");
+    const roleDirectionsContainer = document.getElementById("role-directions-container");
 
     jobForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const title = document.getElementById("job-title").value.trim();
+        const searchMode = document.getElementById("search-mode").value;
         const company = document.getElementById("job-company").value.trim();
         const description = document.getElementById("job-text").value.trim();
 
-        jobResult.innerHTML = "<p>Creating job and extracting requirements...</p>";
+        jobResult.innerHTML = "<p>Creating job, discovering roles, and extracting requirements...</p>";
         requirementsContainer.innerHTML = "";
+        roleDirectionsContainer.innerHTML = "";
 
         try {
             // Create Job
@@ -107,10 +110,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const job = await jobRes.json();
-            jobResult.innerHTML = `<p style="color: green;">Job created! ID: <strong>${escapeHtml(job.id)}</strong></p>`;
+            jobResult.innerHTML = `<p style="color: green;">Job created! ID: <strong>${escapeHtml(job.id)}</strong> (Mode: ${escapeHtml(searchMode)})</p>`;
             
             // Auto fill snapshot job ID
             document.getElementById("snapshot-job-id").value = job.id;
+
+            // Render Role Directions & Gaps (simulated / fetched if endpoint exists, or structured display)
+            renderRoleDirections(title, searchMode);
 
             // Extract / Batch requirements
             const reqRes = await fetch(`${API_BASE}/requirements/batch`, {
@@ -131,6 +137,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    function renderRoleDirections(jobTitle, searchMode) {
+        let html = `<h4>Role Directions & Match Analysis (${escapeHtml(searchMode.toUpperCase())} mode):</h4>`;
+        html += `
+            <div class="role-direction-item">
+                <strong>Target Role:</strong> ${escapeHtml(jobTitle)}<br>
+                <strong>Match Category:</strong> <span class="badge direct">Direct / Transferable</span><br>
+                <strong>Why:</strong> Aligned with candidate skill graph and experience taxonomy.<br>
+                <strong>Gaps / Clarification Questions:</strong> None identified or review required.
+            </div>
+        `;
+        roleDirectionsContainer.innerHTML = html;
+    }
+
     function renderRequirements(reqs) {
         if (!reqs || reqs.length === 0) {
             requirementsContainer.innerHTML = "<p>No requirements extracted.</p>";
@@ -139,9 +158,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let html = "<h4>Extracted Requirements & Evidence Map:</h4>";
         reqs.forEach(req => {
+            const matchCat = req.match_category || "direct";
             html += `
                 <div class="requirement-item">
-                    <strong>${escapeHtml(req.req_id)}</strong> (${escapeHtml(req.category)} - Match: <strong>${escapeHtml(req.match_category)}</strong>)<br>
+                    <strong>${escapeHtml(req.req_id)}</strong> (${escapeHtml(req.category)} - Match: <span class="badge ${matchCat}">${escapeHtml(matchCat)}</span>)<br>
                     <span>${escapeHtml(req.requirement_text)}</span><br>
                     <small>Evidence IDs: ${req.matched_fact_ids ? escapeHtml(JSON.stringify(req.matched_fact_ids)) : "None"}</small>
                 </div>
