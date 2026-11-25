@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const API_BASE = "http://localhost:8000";
+    const API_BASE = window.CAREERPR_API_BASE || "http://localhost:8000";
 
     // 1. Facts Management
     const factForm = document.getElementById("fact-form");
@@ -115,8 +115,12 @@ document.addEventListener("DOMContentLoaded", () => {
             // Auto fill snapshot job ID
             document.getElementById("snapshot-job-id").value = job.id;
 
-            // Render Role Directions & Gaps (simulated / fetched if endpoint exists, or structured display)
-            renderRoleDirections(title, searchMode);
+            // Fetch facts first, then suggest roles and analyze gaps
+            const factsRes = await fetch(`${API_BASE}/facts`);
+            let facts = [];
+            if (factsRes.ok) {
+                facts = await factsRes.json();
+            }
 
             // Extract / Batch requirements
             const reqRes = await fetch(`${API_BASE}/requirements/batch`, {
@@ -131,23 +135,83 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const requirements = await reqRes.json();
             renderRequirements(requirements);
+
+            // Fetch Role Suggestions
+            try {
+                const rolesRes = await fetch(`${API_BASE}/career/roles`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ facts: facts, search_mode: searchMode, run_id: job.id })
+                });
+                if (rolesRes.ok) {
+                    const rolesData = await rolesRes.json();
+                    renderRoleSuggestions(rolesData);
+                } else {
+                    roleDirectionsContainer.innerHTML = "<p>Could not fetch role suggestions.</p>";
+                }
+            } catch (err) {
+                roleDirectionsContainer.innerHTML = `<p style="color: red;">Role suggestions error: ${escapeHtml(err.message)}</p>`;
+            }
+
+            // Analyze Gaps
+            try {
+                const gapsRes = await fetch(`${API_BASE}/career/gaps`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ job_id: job.id, requirements: requirements, facts: facts })
+                });
+                if (gapsRes.ok) {
+                    const gapsData = await gapsRes.json();
+                    renderGapsAnalysis(gapsData);
+                }
+            } catch (err) {
+                console.error("Gaps analysis error:", err);
+            }
+
             fetchProposals();
         } catch (error) {
-            jobResult.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            jobResult.innerHTML = `<p style="color: red;">Error: ${escapeHtml(error.message)}</p>`;
         }
     });
 
-    function renderRoleDirections(jobTitle, searchMode) {
-        let html = `<h4>Role Directions & Match Analysis (${escapeHtml(searchMode.toUpperCase())} mode):</h4>`;
-        html += `
-            <div class="role-direction-item">
-                <strong>Target Role:</strong> ${escapeHtml(jobTitle)}<br>
-                <strong>Match Category:</strong> <span class="badge direct">Direct / Transferable</span><br>
-                <strong>Why:</strong> Aligned with candidate skill graph and experience taxonomy.<br>
-                <strong>Gaps / Clarification Questions:</strong> None identified or review required.
-            </div>
-        `;
+    function renderRoleSuggestions(rolesData) {
+        let html = `<h4>Role Directions & Match Analysis:</h4>`;
+        const suggestions = rolesData.suggestions || rolesData.roles || [];
+        if (suggestions.length === 0) {
+            html += `<p>No role suggestions found.</p>`;
+        } else {
+            suggestions.forEach(role => {
+                const badgeClass = role.match_category || "direct";
+                html += `
+                    <div class="role-direction-item">
+                        <strong>Role:</strong> ${escapeHtml(role.title || role.role_title)}<br>
+                        <strong>Match Category:</strong> <span class="badge ${badgeClass}">${escapeHtml(badgeClass)}</span><br>
+                        <strong>Why:</strong> ${escapeHtml(role.why || role.rationale || "Taxonomy aligned")}<br>
+                        <small>Supporting Facts: ${role.supporting_fact_ids ? escapeHtml(JSON.stringify(role.supporting_fact_ids)) : "None"}</small>
+                    </div>
+                `;
+            });
+        }
         roleDirectionsContainer.innerHTML = html;
+    }
+
+    function renderGapsAnalysis(gapsData) {
+        let html = `<h4>Gaps & Clarification Questions:</h4>`;
+        const questions = gapsData.clarification_questions || [];
+        if (questions.length === 0) {
+            html += `<p>No clarification questions / gaps identified.</p>`;
+        } else {
+            questions.forEach(q => {
+                html += `
+                    <div class="requirement-item" style="border-left: 4px solid #f59e0b;">
+                        <strong>Clarification Question (${escapeHtml(q.question_id)}):</strong><br>
+                        <span>${escapeHtml(q.question_text)}</span><br>
+                        <small>Requirement ID: ${escapeHtml(q.requirement_id)} | Suggested Fact ID: ${escapeHtml(q.suggested_fact_id)}</small>
+                    </div>
+                `;
+            });
+        }
+        roleDirectionsContainer.innerHTML += html;
     }
 
     function renderRequirements(reqs) {

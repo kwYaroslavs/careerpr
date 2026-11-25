@@ -90,6 +90,56 @@ def test_frontend_vacancy_proposal_stretch_workflow(client: TestClient) -> None:
     proposals = prop_list_resp.json()
     assert isinstance(proposals, list)
 
+    # 5. Test real career role and gap endpoints called by frontend
+    roles_resp = client.post(
+        "/career/roles",
+        json={
+            "facts": [
+                {
+                    "id": "fact_python_senior",
+                    "text": "Senior Python dev with 6+ years experience in FastAPI & PostgreSQL",
+                    "category": "experience",
+                    "risk_tier": "low",
+                    "verification_status": "source_backed",
+                    "evidence_ref": "git-commit-12345",
+                }
+            ],
+            "search_mode": "expanded",
+        },
+    )
+    assert roles_resp.status_code == 200
+    roles_data = roles_resp.json()
+    assert "suggestions" in roles_data or "roles" in roles_data
+
+    gaps_resp = client.post(
+        "/career/gaps",
+        json={
+            "job_id": job_id,
+            "requirements": [
+                {
+                    "id": "jreq_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                    "job_id": job_id,
+                    "text": "FastAPI experience required",
+                    "kind": "must",
+                    "user_confirmed": True,
+                }
+            ],
+            "facts": [
+                {
+                    "id": "fact_python_senior",
+                    "text": "Senior Python dev with 6+ years experience in FastAPI & PostgreSQL",
+                    "category": "experience",
+                    "risk_tier": "low",
+                    "verification_status": "source_backed",
+                    "evidence_ref": "git-commit-12345",
+                }
+            ],
+        },
+    )
+    assert gaps_resp.status_code == 200
+    gaps_data = gaps_resp.json()
+    assert "clarification_questions" in gaps_data
+
 
 def test_frontend_adversarial_snapshot_export(client: TestClient) -> None:
     # Attempt snapshot export with non-existent job/proposal
