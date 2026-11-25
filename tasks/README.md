@@ -44,6 +44,12 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-035 | Role Discovery and search modes<br><sub>Поиск ролей и режимы поиска</sub> | MVP-1 | T-032,T-033 | done |
 | T-036 | Adaptive Tailoring for distant roles (V10)<br><sub>Адаптация резюме под далёкие роли (V10)</sub> | MVP-1 | T-019,T-020,T-033 | done |
 | T-037 | Frontend: modes, role directions, match categories<br><sub>Фронтенд: режимы, направления, категории</sub> | MVP-1 | T-028,T-035,T-036 | done |
+| T-038 | Real DB migration baseline<br><sub>Рабочая базовая миграция БД</sub> | MVP-1 | T-003 | done |
+| T-039 | Config: DATABASE_URL from .env<br><sub>Конфиг: DATABASE_URL из .env</sub> | MVP-1 | T-038 | todo |
+| T-040 | Enable CORS for frontend<br><sub>CORS для фронтенда</sub> | MVP-1 | T-039 | todo |
+| T-041 | Expose career API<br><sub>HTTP API для карьерных функций</sub> | MVP-1 | T-033,T-034,T-035 | todo |
+| T-042 | Frontend: real role/gap endpoints<br><sub>Фронтенд: реальные эндпоинты ролей и пробелов</sub> | MVP-1 | T-040,T-041 | todo |
+| T-043 | Golden suite, dev UX and cleanup<br><sub>Golden, удобство запуска, уборка</sub> | MVP-1 | T-038 | todo |
 
 ## How to delegate to an AI / Как отдать задачу ИИ
 Copy this prompt and attach exactly one card / Скопируйте промпт и приложите ровно одну карточку:
