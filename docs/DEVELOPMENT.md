@@ -3,15 +3,18 @@
 ## 1. Prerequisites
 Python 3.12, Node 20+ (frontend, later), Git, Make, Docker (optional in MVP-0). Optional: Ollama for local models.
 
-## 2. First run
+## 2. First run & Quick Start
 ```bash
 git clone <repo> && cd careerpr
 cp .env.example .env          # LLM_PROVIDER=fake works with no keys
-make setup                    # venv + deps + pre-commit hooks
+make setup                    # venv + deps + pre-commit hooks + alembic upgrade head
 make test                     # must be green on a clean checkout
 make dev                      # API on http://localhost:8000 (/docs = Swagger)
 ```
 Default is `LLM_PROVIDER=fake` (FakeLLM + fixtures): the whole pipeline runs offline, deterministic, zero quota. Switch to a real provider only via `.env`.
+
+To open the frontend:
+Open `frontend/index.html` directly in your browser or serve it via a static file server (e.g., `cd frontend && python3 -m http.server 3000`).
 
 ## 3. Commands
 | Command | Purpose |
@@ -21,7 +24,7 @@ Default is `LLM_PROVIDER=fake` (FakeLLM + fixtures): the whole pipeline runs off
 | `make golden` | golden e2e only (CV+JD → PDF on FakeLLM) |
 | `make lint` / `make fmt` | ruff check+format check / autofix |
 | `make typecheck` | mypy (strict on `app/`) |
-| `make check` | lint + typecheck + test. **Run before every commit** |
+| `make check` | lint + typecheck + test + golden. **Run before every commit** |
 | Live LLM smoke | `LLM_PROVIDER=gemini pytest -m live` (manual, never in CI) |
 | Migrations | `cd backend && alembic revision --autogenerate -m "msg"` then `alembic upgrade head` |
 
@@ -38,13 +41,13 @@ git switch -c feat/T-004-validators-v1-v3
 Conventional Commits: `type(scope): imperative summary` ≤ 72 chars.
 Examples: `feat(validators): add V2 no-new-numbers`, `fix(gateway): retry only on 429/timeout`, `docs(data-model): add AnswerBank`.
 - Commit small, logical steps. Body explains *why* if not obvious. Reference card: `Refs T-004`.
-- Never commit: `.env`, keys, real CVs/PII, `data/`, `*.sqlite`, generated PDFs (except golden fixtures with fake data).
+- Never commit: `.env`, keys, real CVs/PII, `data/`, `*.sqlite`, `*.db`, generated PDFs (except golden fixtures with fake data).
 
 ## 6. Pre-commit routine (every time)
 ```bash
 git status && git diff          # read your own diff; remove debug/unrelated changes
 make fmt                        # autofix style
-make check                      # lint + mypy + tests — must be green
+make check                      # lint + mypy + tests + golden — must be green
 git add -p                      # stage deliberately, not `git add .`
 git commit -m "feat(scope): ..."
 ```
