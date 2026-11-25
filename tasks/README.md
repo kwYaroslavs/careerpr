@@ -61,3 +61,6 @@ Full step-by-step flow / Полный флоу: `docs/WORKFLOW.md`.
 ## Dependency rule / Правило зависимостей
 EN: Data-model or contract changes not already specified. If needed: stop and propose an ADR/card.
 RU: Не начинать карточку, пока зависимости не влиты и не `done`. Если карточка больше ~400 строк диффа — сначала разбить.
+
+## Demo (not a card) / Демо
+`make demo` → http://localhost:8000 — one-page UI: CV + vacancy → resume, PDF, cover letter, roles, gaps. Providers: fake (offline), gemini, deepseek, ollama. Code: `backend/app/demo/`, `backend/app/api/demo.py`, `frontend/demo.*`.

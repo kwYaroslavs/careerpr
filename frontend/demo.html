@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CareerPR — демо</title>
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<header><h1>CareerPR <span>демо</span></h1>
+<p>Вставьте CV и вакансию → получите резюме под вакансию, PDF, сопроводительное письмо, роли и пробелы.</p></header>
+<main>
+<section class="card">
+  <div class="grid2">
+    <label>1. Ваше CV (текст)
+      <textarea id="cv" rows="14" placeholder="Вставьте текст CV…"></textarea></label>
+    <label>2. Вакансия (текст)
+      <textarea id="job" rows="14" placeholder="Вставьте текст вакансии…"></textarea></label>
+  </div>
+  <div class="row"><button class="ghost" id="sample">📋 Заполнить тестовыми данными</button>
+    <button class="ghost" id="clear">Очистить</button></div>
+</section>
+
+<section class="card">
+  <h2>3. Модель</h2>
+  <div class="grid4">
+    <label>Провайдер
+      <select id="provider">
+        <option value="fake">Fake (офлайн, без ключа)</option>
+        <option value="gemini">Gemini</option>
+        <option value="deepseek">DeepSeek</option>
+        <option value="openrouter">OpenRouter (только бесплатные)</option>
+        <option value="ollama">Ollama (локально)</option>
+      </select></label>
+    <label>API-ключ <small id="keyhint">(несколько — через запятую; пусто = из .env)</small>
+      <input id="key" type="password" autocomplete="off" placeholder="не сохраняется"></label>
+    <label>Модель <small>(необязательно)</small><input id="model" placeholder="по умолчанию"></label>
+    <label>Режим поиска ролей
+      <select id="mode"><option value="expanded">Расширенный</option>
+        <option value="strict">Строгий</option><option value="exploration">Исследование</option></select></label>
+  </div>
+  <div class="grid4">
+    <label>Крючок для письма <small>(почему эта компания)</small><input id="hook" placeholder="напр. ваш продукт X"></label>
+    <label>Разрешение на работу<input id="auth" placeholder="напр. EU citizen"></label>
+    <label>Локация<input id="loc" placeholder="напр. Kyiv, Ukraine"></label>
+    <label>Расход запросов к LLM
+      <select id="effort"><option value="min" selected>Мин. — 3 запроса</option>
+        <option value="balanced">Средний — ~6</option><option value="full">Полный — до 11</option></select></label>
+    <label>Макс. страниц резюме<select id="pages"><option>1</option><option selected>2</option><option>3</option></select></label>
+  </div>
+  <label class="check" id="consentRow"><input type="checkbox" id="consent">
+    Согласен отправить текст CV и вакансии во внешний LLM (Gemini/DeepSeek/OpenRouter)</label>
+  <div class="row">
+    <button class="big green" id="full">🧪 Полный тест одной кнопкой (без LLM)</button>
+    <button class="big" id="run">▶ Запустить</button>
+    <span id="status"></span>
+  </div>
+</section>
+
+<section id="out" class="card hidden">
+  <nav id="tabs"></nav>
+  <div id="pane"></div>
+</section>
+</main>
+<script src="demo.js"></script>
+</body></html>

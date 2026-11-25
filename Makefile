@@ -1,4 +1,4 @@
-.PHONY: setup dev test lint fmt typecheck check golden clean migrate
+.PHONY: demo setup dev test lint fmt typecheck check golden clean migrate
 PY=cd backend && . .venv/bin/activate &&
 setup:
 	if [ ! -f backend/.env ]; then cp .env.example backend/.env; fi
@@ -6,6 +6,8 @@ setup:
 	$(PY) alembic upgrade head
 migrate:
 	$(PY) alembic upgrade head
+demo:  ## open http://localhost:8000 (demo UI)
+	$(PY) uvicorn app.main:app --port 8000
 dev:
 	$(PY) uvicorn app.main:app --reload --port 8000
 test:

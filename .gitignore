@@ -11,3 +11,4 @@ data/
 *.sqlite
 *.db
 .DS_Store
+*.egg-info/
