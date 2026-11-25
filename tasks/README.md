@@ -47,7 +47,7 @@ Statuses / Статусы: `todo` · `doing` · `review` · `done`.
 | T-038 | Real DB migration baseline<br><sub>Рабочая базовая миграция БД</sub> | MVP-1 | T-003 | done |
 | T-039 | Config: DATABASE_URL from .env<br><sub>Конфиг: DATABASE_URL из .env</sub> | MVP-1 | T-038 | done |
 | T-040 | Enable CORS for frontend<br><sub>CORS для фронтенда</sub> | MVP-1 | T-039 | done |
-| T-041 | Expose career API<br><sub>HTTP API для карьерных функций</sub> | MVP-1 | T-033,T-034,T-035 | todo |
+| T-041 | Expose career API<br><sub>HTTP API для карьерных функций</sub> | MVP-1 | T-033,T-034,T-035 | done |
 | T-042 | Frontend: real role/gap endpoints<br><sub>Фронтенд: реальные эндпоинты ролей и пробелов</sub> | MVP-1 | T-040,T-041 | todo |
 | T-043 | Golden suite, dev UX and cleanup<br><sub>Golden, удобство запуска, уборка</sub> | MVP-1 | T-038 | todo |
 

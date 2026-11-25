@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.applications import router as applications_router
+from app.api.career import router as career_router
 from app.api.facts import router as facts_router
 from app.api.jobs import router as jobs_router
 from app.api.proposals import router as proposals_router
@@ -24,6 +25,7 @@ app.include_router(jobs_router)
 app.include_router(requirements_router)
 app.include_router(proposals_router)
 app.include_router(applications_router)
+app.include_router(career_router)
 
 
 @app.get("/health")
