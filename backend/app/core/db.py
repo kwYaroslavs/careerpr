@@ -1,12 +1,29 @@
 """Database core setup: SQLAlchemy 2 engine, session, Base and immutable tables enforcement."""
 
+import os
 from collections.abc import Generator
+from pathlib import Path
 from typing import Any
 
 from sqlalchemy import Engine, create_engine, event
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
-DATABASE_URL = "sqlite:///./careerpr.db"
+from app.core.config import get_settings
+
+settings = get_settings()
+DATABASE_URL = settings.database_url
+
+if DATABASE_URL.startswith("sqlite:///"):
+    db_path_str = DATABASE_URL.replace("sqlite:///", "", 1)
+    # Handle relative or absolute paths, e.g., sqlite:///./data/careerpr.db -> ./data
+    if not db_path_str.startswith(":memory:"):
+        # If it's a file path, extract directory and ensure it exists
+        path_obj = Path(db_path_str)
+        if path_obj.parent and str(path_obj.parent) != ".":
+            path_obj.parent.mkdir(parents=True, exist_ok=True)
+        elif "./" in db_path_str or "/" in db_path_str:
+            # e.g. sqlite:///./data/careerpr.db or sqlite:///data/careerpr.db
+            os.makedirs(os.path.dirname(os.path.abspath(db_path_str.lstrip("/"))), exist_ok=True)
 
 engine: Engine = create_engine(
     DATABASE_URL,

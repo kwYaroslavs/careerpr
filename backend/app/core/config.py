@@ -28,6 +28,8 @@ class Settings(BaseSettings):
     ollama_base_url: str = Field(default="http://localhost:11434", description="Ollama base URL")
     ollama_model: str = Field(default="llama3", description="Ollama model name")
 
+    database_url: str = Field(default="sqlite:///./data/careerpr.db", description="Database URL")
+
     @field_validator("llm_provider")
     @classmethod
     def validate_provider(cls, v: str) -> str:
